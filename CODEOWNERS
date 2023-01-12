@@ -9,3 +9,7 @@
 
 #what if targetting specific folders
 /docs/* @adarshs-kr
+
+#This is list of approvers to approve Java Files
+*.java @adarshs-kr
+
