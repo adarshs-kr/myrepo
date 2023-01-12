@@ -8,4 +8,4 @@
 *.txt @adarshs-kr
 
 #what if targetting specific folders
-/docs/* @adarshs-kr
+/docs/* @adarshs-kr @anushkas-kr
