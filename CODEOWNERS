@@ -7,5 +7,5 @@
 #This is list of approvers to approve TXT Files
 *.txt @adarshs-kr
 
-#what if targetting specific folders to commit
+#what if targetting specific folders to commit the files
 /docs/* @adarshs-kr
