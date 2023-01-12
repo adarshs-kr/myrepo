@@ -1,0 +1,8 @@
+#This is the List of Approvers to approve any files
+* @adarshs-kr @mohita-kr
+
+#This is list of approvers to approve Json Files
+*.json @mohita-kr
+
+#what if targetting specific folders
+/docs/* @adarshs-kr
