@@ -4,5 +4,8 @@
 #This is list of approvers to approve Json Files
 *.json @mohita-kr
 
+#This is list of approvers to approve TXT Files
+*.txt @adarshs-kr
+
 #what if targetting specific folders
 /docs/* @adarshs-kr
