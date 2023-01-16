@@ -1,4 +1,4 @@
-name: Sync Dev to Test
+name: Sync Dev to TEST
 
 on:
   push:
@@ -7,17 +7,17 @@ on:
 
 jobs:
   sync-to-Test:
-    name: sync-to-Test
+    name: sync-to-TEST
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: Synchronize Dev and Test branches
+    - name: Synchronize Dev and TEST branches
       run: |
         git checkout $TARGET_BRANCH
         git merge --ff-only $SOURCE_BRANCH
         git push origin $TARGET_BRANCH
       env:
         SOURCE_BRANCH: Dev
-        TARGET_BRANCH: Test
+        TARGET_BRANCH: TEST
