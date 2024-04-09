@@ -1,0 +1,48 @@
+name: SYNC Publish Branch to Release Branch
+
+on:
+  push:
+    branches:
+      - publish_branch
+  workflow_dispatch:
+
+jobs:
+  sync-to-release-and-copy:
+    name: sync-to-release-and-copy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    # Synchronize publish and release branches
+    - name: Synchronize publish and release branches
+      run: |
+        git checkout $TARGET_BRANCH
+        git merge --ff-only $SOURCE_BRANCH
+        git push origin $TARGET_BRANCH
+      env:
+        SOURCE_BRANCH: publish_branch
+        TARGET_BRANCH: release_branch
+
+    # Create folder with current date
+    - name: Create Folder with Current Date
+      run: |
+        mkdir "$(date +%Y-%m-%d)"
+
+    # Copy branch contents to newly created folder
+    - name: Copy Branch Contents to New Folder
+      run: |
+        cp -r . "$(date +%Y-%m-%d)"
+
+    # Checkout target branch
+    - name: Checkout Release Branch
+      run: git checkout release_branch # Replace with your release branch name
+
+    # Copy files from folder to release branch
+    - name: Copy Files from Folder to Release Branch
+      run: |
+        cp -r "$(date +%Y-%m-%d)"/* .
+        git add .
+        git commit -m "Copy files from publish_branch to release_branch"
+        git push origin release_branch # Replace with your release branch name
