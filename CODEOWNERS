@@ -1,18 +1,1 @@
-#This is list of approvers to approve all the files.
-*  @mohita-kr @adarshs-kr
-
-#This is list of approvers to approve Json Files
-*.json @mohita-kr
-
-#This is list of approvers to approve python Files
-*.py @mohita-kr
-
-#This is list of approvers to approve TXT Files
-*.txt @adarshs-kr
-
-#what if targetting specific folders
-/docs/* @adarshs-kr
-
-#This is list of approvers to approve Java Files
-*.java @adarshs-kr
 
