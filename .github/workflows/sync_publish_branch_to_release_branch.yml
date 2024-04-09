@@ -1,4 +1,4 @@
-name: SYNC Publish Branch to Release Branch
+name: sync_publish_branch_to_release_branch
 
 on:
   push:
