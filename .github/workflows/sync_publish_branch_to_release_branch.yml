@@ -7,11 +7,7 @@ on:
         description: 'Source branch to copy files from'
         required: true
         default: 'publish_branch'
-      release_branch:
-        description: 'Target branch to copy files to'
-        required: true
-        default: 'release_branch'
-
+      
 jobs:
   sync-files:
     name: Sync Files
@@ -31,7 +27,7 @@ jobs:
         # Use github.run_id for timestamped folder in BACKUP
 
       - name: Checkout Release Branch
-        run: git checkout ${{ github.event.inputs.release_branch }}
+        run: git checkout master  # Replace 'master' with your actual release branch name
 
       - name: Add Backup Files
         run: git add BACKUP/
@@ -41,4 +37,4 @@ jobs:
           git commit -m "Backup from ${{ github.event.inputs.publish_branch }} at ${TIMESTAMP}"
 
       - name: Push Changes
-        run: git push origin ${{ github.event.inputs.release_branch }}
+        run: git push origin master  # Replace 'master' with your actual release branch name
