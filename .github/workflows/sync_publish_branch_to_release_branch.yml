@@ -17,10 +17,10 @@ jobs:
     name: Sync Files
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout Publish Branch
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.publish_branch }}  # Checkout the specified publish_branch
+          ref: ${{ github.event.inputs.publish_branch }}
 
       - name: Create Backup Directory
         run: mkdir -p BACKUP/${{ github.run_id }}
@@ -30,12 +30,15 @@ jobs:
           rsync -av --exclude='.git/' mx-core-data-dev-dfws/ BACKUP/${{ github.run_id }}/
         # Use github.run_id for timestamped folder in BACKUP
 
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.email "adarsh.singh@kroger.com"
-          git config --global user.name "adarshs-kr"
+      - name: Checkout Release Branch
+        run: git checkout ${{ github.event.inputs.release_branch }}
 
-          git checkout ${{ github.event.inputs.release_branch }}
-          git add BACKUP/
+      - name: Add Backup Files
+        run: git add BACKUP/
+
+      - name: Commit Changes
+        run: |
           git commit -m "Backup from ${{ github.event.inputs.publish_branch }} at ${TIMESTAMP}"
-          git push origin ${{ github.event.inputs.release_branch }}
+
+      - name: Push Changes
+        run: git push origin ${{ github.event.inputs.release_branch }}
